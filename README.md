@@ -1,363 +1,69 @@
 # Smart_Early_Dropout_Prediction_System
-Smart Early Dropout Prediction System
 
-Project Overview
+##  Introduction
 
-The objective of this project is to use machine learning techniques to predict student dropout in secondary schools. Accurate predictions can help schools intervene early and reduce dropout rates. The dataset consists of students' academic and demographic information.
+In many developing regions, student dropout rates in secondary schools are alarmingly high, often due to socioeconomic factors, academic struggles, and limited access to educational support. This project leverages machine learning models to predict students at risk of dropping out, enabling timely interventions. The dataset includes academic records and demographic attributes of students, with the `Target` variable representing dropout categories.
 
-I implemented four models:
+This is the link to the DataSet that I have used " https://www.kaggle.com/datasets/adilshamim8/predict-students-dropout-and-academic-success?utm_source=chatgpt.com "
 
-A basic neural network without any optimization.
+---
 
-An optimized neural network using Adam, L2 regularization, dropout, and early stopping.
+##  Objective
 
-A second optimized neural network using RMSprop, L1 regularization, and a higher dropout rate.
+To build and evaluate multiple machine learning models that can classify students based on their risk of dropout using different optimization and regularization techniques.
 
-An XGBoost classifier with tuned hyperparameters.
+---
 
-The best performing model was the optimized neural network (Model 2).
+##  Training Instances Table
 
-Dataset
+| Instance | Model Type | Optimizer      | Regularizer | Dropout | Epochs | Early Stopping | Learning Rate | Accuracy | F1 (macro) |
+| -------- | ---------- | -------------- | ----------- | ------- | ------ | -------------- | ------------- | -------- | ---------- |
+| **1**    | Neural Net | Adam (default) | None        | None    | 20     |  No           | Default       | 36%      | 0.35       |
+| **2**    | Neural Net | Adam           | L2          | 0.3     | \~20   |  Yes          | 0.001         | **78%**  | **0.71**   |
+| **3**    | Neural Net | RMSprop        | L1          | 0.5     | \~20   |  Yes          | 0.0005        | 77%      | 0.68       |
+| **4**    | XGBoost    | n/a            | L1+L2       | n/a     | 150    |  (Native)     | 0.1           | **78%**  | 0.70       |
 
-Source: Public student performance dataset
+---
 
-Preprocessing included: one-hot encoding, standardization, label encoding for the target
+##  Summary of Results
 
-Target column: Target (with classes 0, 1, 2)
+* **Best Performing Model**: Instance 2 (Neural Network with Adam, L2 regularization, dropout, and early stopping)
+* It achieved the highest macro F1-score (0.71), showing strong balance across all dropout classes.
+* Compared to XGBoost (Instance 4), the optimized neural network handled class imbalance better.
+* Model 1 performed poorly due to lack of optimization.
 
-Model Comparison Table
+---
 
-Instance
+##  Saved Models Directory
 
-Model Type
+Placed all trained models in the following structure:
 
-Optimizer
-
-Regularizer
-
-Dropout
-
-Epochs
-
-Early Stopping
-
-Learning Rate
-
-Accuracy
-
-F1 (macro)
-
-1
-
-Neural Net
-
-Adam (default)
-
-None
-
-None
-
-20
-
- No
-
-Default
-
-36%
-
-0.35
-
-2
-
-Neural Net
-
-Adam
-
-L2
-
-0.3
-
-~20
-
- Yes
-
-0.001
-
-78%
-
-0.71
-
-3
-
-Neural Net
-
-RMSprop
-
-L1
-
-0.5
-
-~20
-
- Yes
-
-0.0005
-
-77%
-
-0.68
-
-4
-
-XGBoost
-
-n/a
-
-L1+L2
-
-n/a
-
-150
-
- (Native)
-
-0.1
-
-78%
-
-0.70
-
-Training Instances (Neural Network Models)
-
-Instance
-
-Optimizer
-
-Regularizer
-
-Epochs
-
-Early Stopping
-
-Layers
-
-Learning Rate
-
-Accuracy
-
-F1 Score
-
-Precision
-
-Recall
-
-1
-
-Adam (default)
-
-None
-
-20
-
-No
-
-3
-
-default
-
-36%
-
-0.35
-
-0.29
-
-0.49
-
-2
-
-Adam
-
-L2
-
-~20
-
-Yes
-
-3
-
-0.001
-
-78%
-
-0.71
-
-0.77
-
-0.70
-
-3
-
-RMSprop
-
-L1
-
-~20
-
-Yes
-
-3
-
-0.0005
-
-77%
-
-0.68
-
-0.75
-
-0.67
-
-4
-
-Adam
-
-L2
-
-~15
-
-Yes
-
-4
-
-0.002
-
-76%
-
-0.69
-
-0.74
-
-0.66
-
-5
-
-Adam
-
-L2
-
-~25
-
-Yes
-
-5
-
-0.0008
-
-78%
-
-0.70
-
-0.76
-
-0.69
-
-Best Performing Model
-
-Model 2: Optimized Neural Network
-
-Outperformed other models with an F1 score of 0.71
-
-Strong recall on underrepresented classes
-
-Generalized well due to combined use of:
-
-Adam Optimizer
-
-L2 Regularization
-
-Dropout (0.3)
-
-EarlyStopping
-
-Tuned learning rate (0.001)
-
-Neural Network vs Classical ML (XGBoost)
-
-Criteria
-
-Neural Network (Model 2)
-
-XGBoost (Model 4)
-
-Accuracy
-
-78%
-
-78%
-
-F1 Score
-
-0.71
-
-0.70
-
-Class 1 Recall
-
-0.40
-
-0.38
-
-Flexibility
-
-High
-
-Medium
-
-Complexity
-
-Higher
-
-Lower
-
-Speed
-
-Slower
-
-Faster
-
-Conclusion: The Neural Network (Model 2) slightly outperformed XGBoost in terms of balanced metrics, especially for minority class 1. It is the recommended model for deployment.
-
-Saved Models
-
-All saved models are found in the /saved_models/ directory:
-
+```
 /saved_models/
-    model_1_basic_nn.h5
-    model_2_optimized_nn.h5  (BEST MODEL)
-    model_3_rmsprop_l1_dropout.h5
+├── model_1_basic_nn.h5
+├── model_2_optimized_nn.h5  #Best Model
+├── model_3_rmsprop_l1_dropout.h5
+```
 
-How to Run This Project
+---
 
-Open notebook.ipynb in Jupyter or Google Colab
+##  Run Instructions
 
-Run all cells from top to bottom
+1. Open `notebook.ipynb`
+2. Run all cells to train or evaluate models
+3. Load the best model:
 
-Load the best model for predictions:
-
+```python
 from tensorflow.keras.models import load_model
 model = load_model('saved_models/model_2_optimized_nn.h5')
+```
 
-Video Presentation (5 minutes)
+---
 
-Includes:
+##  Video Presentation Checklist
 
-Summary of models
-
-Evaluation metrics
-
-Confusion matrix
-
-Which model worked best and why
-
-Explanation of optimization techniques used
-
+* Brief introduction of the project and dataset
+* The table of training instances
+* Summary of results and best model
+* Explanation of model choices and hyperparameters
+* Visuals: confusion matrix and plots (if available)
