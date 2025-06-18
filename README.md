@@ -1,6 +1,6 @@
 # Smart_Early_Dropout_Prediction_System
 
-##  Introduction
+##  Overview
 
 In many developing regions, student dropout rates in secondary schools are alarmingly high, often due to socioeconomic factors, academic struggles, and limited access to educational support. This project leverages machine learning models to predict students at risk of dropping out, enabling timely interventions. The dataset includes academic records and demographic attributes of students, with the `Target` variable representing dropout categories.
 
