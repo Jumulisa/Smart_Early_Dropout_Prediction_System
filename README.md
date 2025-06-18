@@ -6,6 +6,8 @@ In many developing regions, student dropout rates in secondary schools are alarm
 
 This is the link to the DataSet that I have used " https://www.kaggle.com/datasets/adilshamim8/predict-students-dropout-and-academic-success?utm_source=chatgpt.com "
 
+This is the link uploaded to youtube explaining the project and all the models " https://www.youtube.com/watch?v=fiQtkMzTavI "
+
 ---
 
 ##  Objective
